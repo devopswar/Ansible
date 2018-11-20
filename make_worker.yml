@@ -43,6 +43,7 @@
     - {role: cyberark.conjur-host-identity,
        conjur_appliance_url: 'https://54.193.30.240',
        conjur_account: 'devopswar',
+       conjur_validate_certs: no,
        conjur_host_factory_token: "24r1syx1rzqagh1kxhpttqc0v05f3rcqhvpk5fy2ttnqv21gwmjjd",
        conjur_host_name: "{{ ansible_default_ipv4.address }}"}
 
