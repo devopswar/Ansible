@@ -1,4 +1,7 @@
 ---
+- debug:
+    msg: "{{ lookup('conjur_variable', 'ansible/access-key') }}"
+
 - name: Find instaces
   hosts: localhost
   connection: local
