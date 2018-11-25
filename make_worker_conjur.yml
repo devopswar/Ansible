@@ -6,8 +6,8 @@
   become: False
   tasks:
   
-  - debug:
-      msg: "{{ lookup('conjur_variable', 'ansible/access-key') }}"
+   - debug:
+       msg: "{{ lookup('conjur_variable', 'ansible/access-key') }}"
 
    - name: Get the instaces
      vars:
