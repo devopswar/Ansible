@@ -10,6 +10,6 @@
        conjur_appliance_url: 'https://54.193.30.240',
        conjur_account: 'devopswar',
        conjur_ssl_certificate: '',
-       conjur_validate_certs: no,
+       conjur_validate_certs: "no",
        conjur_host_factory_token: "3ezraar308frdd2sq9amp3kwbagm2jcpnz93fsz26237d4mc129mgb4y",
        conjur_host_name: "ansible/ansible-01"}
