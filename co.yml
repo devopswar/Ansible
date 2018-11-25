@@ -1,7 +1,7 @@
 - name: Find instaces
   hosts: 127.0.0.1
   gather_facts: False
-  become: False
+  become: True
   
   roles:
  
