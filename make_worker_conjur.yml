@@ -8,6 +8,8 @@
 
    - name: Get the instaces
      ec2_instance_facts:
+     aws_access_key = "{{aws_access_key}}"
+     aws_secret_key = "{{aws_secret_key}}"
       region: us-west-1
       filters:
        "tag:state": waiting
@@ -86,6 +88,8 @@
 
    - name: Del waiting tag
      ec2_tag:
+      aws_access_key = "{{aws_access_key}}"
+      aws_secret_key = "{{aws_secret_key}}"
       region:  us-west-1
       resource: '{{ item.instance_id }}'
       state: absent
