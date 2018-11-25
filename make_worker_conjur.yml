@@ -8,8 +8,8 @@
 
    - name: Get the instaces
      vars:
-      aws_access_key: {{  lookup('retrieve_conjur_variable', 'ansible/access-key') }}
-      aws_secret_key: {{  lookup('retrieve_conjur_variable', 'ansible/secret-key') }}
+      aws_access_key: "{{  lookup('retrieve_conjur_variable', 'ansible/access-key') }}"
+      aws_secret_key: "{{  lookup('retrieve_conjur_variable', 'ansible/secret-key') }}"
      ec2_instance_facts:
       region: us-west-1
       filters:
