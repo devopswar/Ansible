@@ -8,8 +8,8 @@
 
    - name: Get the instaces
      ec2_instance_facts:
-      aws_access_key: "{{a}}"
-      aws_secret_key: "{{b}}"
+      aws_access_key: "{{ a }}"
+      aws_secret_key: "{{ b }}"
       region: us-west-1
       filters:
        "tag:state": waiting
