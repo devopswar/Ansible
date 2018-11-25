@@ -1,0 +1,95 @@
+---
+- name: Find instaces
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  become: False
+
+  tasks:
+
+   - name: Get the instaces
+     ec2_instance_facts:
+      region: us-west-1
+      filters:
+       "tag:state": waiting
+       instance-state-name: running
+     register: ec2_info
+
+   - name: Add new instance to the host group
+     add_host:
+       hostname: "{{ item.public_ip_address }}"
+       groupname: waiting
+     with_items: "{{ ec2_info.instances }}"
+
+
+- name: Configuring instaces
+  hosts: waiting
+  gather_facts: True
+  become: True
+
+  pre_tasks:
+
+   - shell: "while lsof /var/lib/dpkg/lock-frontend; do sleep 3; done;"
+
+  roles:
+
+#- {role: cyberark.conjur-host-identity,
+#       conjur_appliance_url: 'https://54.193.30.240',
+#       conjur_account: 'jenkins',
+#       conjur_ssl_certificate: '',
+#       conjur_validate_certs: no,
+#       conjur_host_factory_token: "362h9g93zmmw212jekq1b13br9px1z86nhmgmxz0918r0r4vkgv5db",
+#       conjur_host_name: "frontend/frontend-01"}
+    - geerlingguy.apache
+    - {role: geerlingguy.java, java_packages: openjdk-8-jdk}
+    - geerlingguy.git
+    - geerlingguy.docker
+    - gantsign.maven
+    - geerlingguy.pip
+    - andrewrothstein.kubectl
+
+
+  post_tasks:
+   - pip:
+       name: lxml
+
+   - apt:
+       name: mysql-client-5.7
+       state: latest
+
+
+   - shell: mvn -N io.takari:maven:wrapper
+
+   - file:
+       path: ./mvnw
+       state: file
+       mode: "+x"
+       owner: ubuntu
+
+   - group:
+       name: docker
+       state: present
+
+   - user:
+       name: ubuntu
+       groups: docker
+       append: yes
+
+
+
+- name: Removing instaces tags 
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  become: False
+
+  tasks:
+
+   - name: Del waiting tag
+     ec2_tag:
+      region:  us-west-1
+      resource: '{{ item.instance_id }}'
+      state: absent
+      tags:
+        state: waiting
+     with_items: '{{ ec2_info.instances }}'
