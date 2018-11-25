@@ -4,13 +4,12 @@
   connection: local
   gather_facts: False
   become: False
-  aws_access_key: "{{ec2_access_key}}"
-  aws_secret_key: "{{ec2_secret_key}}"
-  
   tasks:
 
    - name: Get the instaces
      ec2_instance_facts:
+      aws_access_key: "{{ec2_access_key}}"
+      aws_secret_key: "{{ec2_secret_key}}"
       region: us-west-1
       filters:
        "tag:state": waiting
@@ -89,6 +88,8 @@
 
    - name: Del waiting tag
      ec2_tag:
+      aws_access_key: "{{ec2_access_key}}"
+      aws_secret_key: "{{ec2_secret_key}}"
       region:  us-west-1
       resource: '{{ item.instance_id }}'
       state: absent
