@@ -4,7 +4,9 @@
   connection: local
   gather_facts: False
   become: False
-
+  aws_access_key: "{{ec2_access_key}}"
+  aws_secret_key: "{{ec2_secret_key}}"
+  
   tasks:
 
    - name: Get the instaces
