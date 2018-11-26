@@ -8,7 +8,6 @@
   
    - debug:
        msg: "{{ lookup('conjur_variable', 'ansible/access-key') }}"
-       validate_certs: False 
 
    - name: Get the instaces
      vars:
