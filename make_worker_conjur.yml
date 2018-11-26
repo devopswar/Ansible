@@ -25,7 +25,6 @@
 
 - name: Configuring instaces
   hosts: waiting
-  remote_user: ubuntu
   gather_facts: True
   become: True
   
