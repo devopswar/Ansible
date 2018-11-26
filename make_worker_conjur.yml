@@ -26,7 +26,7 @@
 - name: Configuring instaces
   hosts: waiting
   gather_facts: True
-  become: True
+  become: False
   
 
   pre_tasks:
