@@ -25,7 +25,7 @@
 
 - name: Configuring instaces
   hosts: waiting
-  ansible_user: ubuntu
+  remote_user: ubuntu
   ssh_key_data: "{{ lookup('conjur_variable', 'ansible/private-key') }}"
   gather_facts: True
   become: True
