@@ -8,8 +8,8 @@
 
    - name: Get the instaces
      ec2_instance_facts:
-      aws_access_key: "{{ lookup('conjur_variable', 'ansible/access-key') }}"
-      aws_secret_key: "{{ lookup('conjur_variable', 'ansible/secret-key') }}"
+      #aws_access_key: "{{ lookup('conjur_variable', 'ansible/access-key') }}"
+      #aws_secret_key: "{{ lookup('conjur_variable', 'ansible/secret-key') }}"
       region: us-west-1
       filters:
        "tag:state": waiting
@@ -91,8 +91,8 @@
 
    - name: Del waiting tag
      ec2_tag:
-      aws_access_key: "{{ lookup('conjur_variable', 'ansible/access-key') }}"
-      aws_secret_key: "{{ lookup('conjur_variable', 'ansible/secret-key') }}"
+      #aws_access_key: "{{ lookup('conjur_variable', 'ansible/access-key') }}"
+      #aws_secret_key: "{{ lookup('conjur_variable', 'ansible/secret-key') }}"
       region:  us-west-1
       resource: '{{ item.instance_id }}'
       state: absent
