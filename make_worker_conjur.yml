@@ -5,14 +5,11 @@
   gather_facts: False
   become: False
   tasks:
-  
-   - debug:
-       msg: "{{ lookup('conjur_variable', 'ansible/access-key') }}"
 
    - name: Get the instaces
      vars:
-      aws_access_key: "{{  lookup('retrieve_conjur_variable', 'ansible/access-key') }}"
-      aws_secret_key: "{{  lookup('retrieve_conjur_variable', 'ansible/secret-key') }}"
+      aws_access_key: "{{ lookup('conjur_variable', 'ansible/access-key') }}"
+      aws_secret_key: "{{ lookup('conjur_variable', 'ansible/secret-key') }}"
      ec2_instance_facts:
       region: us-west-1
       filters:
@@ -92,8 +89,8 @@
 
    - name: Del waiting tag
      ec2_tag:
-      aws_access_key: "{{aws_access_key}}"
-      aws_secret_key: "{{aws_secret_key}}"
+      aws_access_key: "{{ lookup('conjur_variable', 'ansible/access-key') }}"
+      aws_secret_key: "{{ lookup('conjur_variable', 'ansible/secret-key') }}"
       region:  us-west-1
       resource: '{{ item.instance_id }}'
       state: absent
