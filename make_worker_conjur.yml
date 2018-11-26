@@ -7,10 +7,9 @@
   tasks:
 
    - name: Get the instaces
-     vars:
+     ec2_instance_facts:
       aws_access_key: "{{ lookup('conjur_variable', 'ansible/access-key') }}"
       aws_secret_key: "{{ lookup('conjur_variable', 'ansible/secret-key') }}"
-     ec2_instance_facts:
       region: us-west-1
       filters:
        "tag:state": waiting
