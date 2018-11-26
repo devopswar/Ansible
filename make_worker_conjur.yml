@@ -25,7 +25,7 @@
 
 - name: Configuring instaces
   hosts: waiting
-  gather_facts: True
+  gather_facts: False
   become: False
   
 
